@@ -1,3 +1,4 @@
+#include <msp430.h>
 #include <string.h>
 #include <libTimer.h>
 #include "lcdutils.h"
@@ -27,6 +28,8 @@ void switch_init(){
   switch_update_interrupt_sense();
 }
 
+int switches = 0;
+
 void switch_interrupt_handler(){
   char p2val = switch_update_interrupt_sense();
   switches = ~p2val & SWITCHES;
@@ -44,7 +47,6 @@ int main(){
   switch_init();
 
   enableWDTInterrupts();
-  configure_buttons();
   buzzer_init();
   
   or_sr(0x8);
