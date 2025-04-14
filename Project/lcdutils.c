@@ -54,10 +54,12 @@ u_char _orientation = 0;
 
 int StrLength(char *Str){
   int len = 0;
+  int strLength = 0;
   while(Str[len] != '\0'){
-    len++;
+    len ++;
+    strLength += 5;
   }
-  return len;
+  return strLength++;
 }
 
 /** Set up onboard LCD's SPI and control pins */

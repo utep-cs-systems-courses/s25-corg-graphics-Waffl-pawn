@@ -13,6 +13,7 @@ libLcd.a: font-5x7.o lcdutils.o lcddraw.o
 
 lcddraw.o: lcddraw.c lcddraw.h lcdutils.h
 lcdutils.o: lcdutils.c lcdutils.h
+buzzer.c: buzzer.h
 
 install: libLcd.a
 	mkdir -p ../h ../lib
@@ -22,7 +23,7 @@ install: libLcd.a
 clean:
 	rm -f libLcd.a *.o *.elf
 
-main.elf: main.o libLcd.a 
+main.elf: main.o libLcd.a buzzer.h
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@ -lTimer 
 
 load: main.elf
