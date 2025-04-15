@@ -39,10 +39,38 @@ void switch_interrupt_handler(){
   switches = ~p2val & SWITCHES;
 }
 
+u_char width = screenWidth, height = screenHeight;
+
+
 void wdt_c_handler(){
   static int counter = 0;
   counter++;
 
+  
+}
+
+int main(){
+  P1DIR |= LED;
+  P1OUT |= LED;
+  configureClocks();
+  lcd_init();
+  switch_init();
+
+  enableWDTInterrupts();
+  buzzer_init();
+  or_sr(0x8);  
+
+  clearScreen(COLOR_WHITE);
+
+  char* Mary = "Marry Had a little Lamb";
+  fillRectangle(4,4,StrLength(Mary),10,COLOR_BLACK);
+  drawString5x7(5,5, "Mary Had a little Lamb", COLOR_WHITE, COLOR_BLACK);
+
+  char* Mc = "Old Mc Donald";
+  fillRectangle(4,16, StrLength(Mc), 10, COLOR_BLACK);
+  drawString5x7(17,5, "Old Mc Donald", COLOR_WHITE, COLOR_BLACK);
+  
+  
   switch(state){
   case 0:
     if(hover == 0){
@@ -55,33 +83,8 @@ void wdt_c_handler(){
   case 1:
     break;
   }
-}
-
-int main(){
-  P1DIR |= LED;
-  P1OUT |= LED;
-  configureClocks();
-  lcd_init();
-  switch_init();
-
-  //enableWDTInterrupts();
-  //buzzer_init();
-  
-  or_sr(0x8);
 
   
-  u_char width = screenWidth, height = screenHeight;
-
-  clearScreen(COLOR_WHITE);
-
-  char* Mary = "Marry Had a little Lamb";
-  fillRectangle(4,4,StrLength(Mary),10,COLOR_BLACK);
-  drawString5x7(5,5, "Mary Had a little Lamb", COLOR_WHITE, COLOR_BLACK);
-
-  char* Mc = "Old Mc Donald";
-  fillRectangle(4,16, StrLength(Mc), 10, COLOR_BLACK);
-  drawString5x7(17,5, "Old Mc Donald", COLOR_WHITE, COLOR_BLACK);
-
   //enableWDTInterrupts();
   
   P1OUT &= ~LED;
@@ -91,7 +94,7 @@ int main(){
 }
 
 
-void __interrupt_vec(PORT2_VECTOR) Port_2(){
+void __interrupt_vec(PORT2_VECTOR) Port_2(){  
     if(P2IFG & SW1){
       if(state == 0){
 	hover = 1;
