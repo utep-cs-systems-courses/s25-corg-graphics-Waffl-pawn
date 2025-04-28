@@ -21,9 +21,9 @@ install: libLcd.a
 	cp *.h ../h
 
 clean:
-	rm -f libLcd.a *.o *.elf
+	rm -f libLcd.a *.o *.elf *.c~ *.h~
 
-main.elf: main.o libLcd.a buzzer.o
+main.elf: main.o libLcd.a buzzer.o stateMachines.o p2_interrupt_handler.o switches.o
 	$(CC) $(CFLAGS) $(LDFLAGS) $^ -o $@ -lTimer 
 
 load: main.elf
