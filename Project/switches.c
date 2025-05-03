@@ -1,6 +1,5 @@
 #include <msp430.h>
 #include "switches.h"
-#include "main.c"
 
 int sw1Down = 0;
 int sw2Down = 0;
@@ -43,6 +42,14 @@ void switch_interrupt_handler(){
     if(hover == 3)
       hover = 0;
     hover++;
+  }
+  else if(sw3Down){
+    if(hover == 0){
+      //playSong();
+    }
+  }
+  else if(sw4Down){
+    
   }
   
   switches = ~p2val & SWITCHES;

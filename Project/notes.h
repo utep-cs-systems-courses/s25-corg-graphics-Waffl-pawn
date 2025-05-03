@@ -10,4 +10,13 @@
 #define F 2863
 #define G 2551
 
+//notes for Ponyo
+#define G4 2551
+#define A4 2273
+#define BSH4 2144
+#define C5 1911
+#define D5 1702
+#define ESH5 1607
+#define F5 1432
+
 #endif

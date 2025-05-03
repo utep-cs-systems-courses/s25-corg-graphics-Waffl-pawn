@@ -10,9 +10,8 @@
 
 void switch_init();
 void switch_interrupt_handler();
-int retHover();
 
 extern int sw1Down, sw2Down, sw3Down, sw4Down;
-extern int hover;
+extern int hover, state;
 
 #endif
