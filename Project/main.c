@@ -9,7 +9,7 @@
 
 #define LED BIT6;
 
-int state = 0;
+int play = 0;
 int hover= 0;
 static char p2val;
 
@@ -23,9 +23,8 @@ static char* Woods = "Lost Woods";
 void __interrupt_vec(WDT_VECTOR) WDT(){
   static int counter = 0;
   counter++;
-  //buzzer_set_period(0);
-
-  if(state == 1){
+  
+  if(play == 1){
     if(counter == 125 && counter == 250){
 	switch(hover){
 	case 2:
@@ -37,10 +36,10 @@ void __interrupt_vec(WDT_VECTOR) WDT(){
 	}
       }
   }
+  
   //this code will alternate the color between black and white with the
   //corisponding hover state which just means which song is being hovered
   if(counter == 125){
-    buzzer_set_period(0);
     switch(hover){
     case 0://Mary had a little lamb
 
@@ -53,12 +52,12 @@ void __interrupt_vec(WDT_VECTOR) WDT(){
 	drawString5x7(17,5, "Old Mc Donald", COLOR_BLACK, COLOR_WHITE);
 	break;
     case 2://Twinkle little star
-      
+      playSong2();
         fillRectangle(4,28, StrLength(Mc), 10, COLOR_WHITE);
 	drawString5x7(29,5, "Ponyo", COLOR_BLACK, COLOR_WHITE);
 	break;
     case 3://Lost woods
-      
+      playSong3();
         fillRectangle(4,40, StrLength(Woods), 10, COLOR_WHITE);
 	drawString5x7(41,5, "Lost Woods", COLOR_BLACK, COLOR_WHITE);
 	break;
@@ -87,7 +86,7 @@ void __interrupt_vec(WDT_VECTOR) WDT(){
 	drawString5x7(29,5, "Ponyo", COLOR_WHITE, COLOR_BLACK);
 	break;
     case 3://Lost woods
-      playSong3();
+       playSong3();
         fillRectangle(4,40, StrLength(Woods), 10, COLOR_BLACK);
 	drawString5x7(41,5, "Lost Woods", COLOR_WHITE, COLOR_BLACK);
 	break;
@@ -123,8 +122,15 @@ int main(){
   
   fillRectangle(4,40, StrLength(Woods), 10, COLOR_BLACK);
   drawString5x7(41,5, "Lost Woods", COLOR_WHITE, COLOR_BLACK);
-  
-  
+
+
+  while(play == 0){
+    if(play == 1){
+      fillRectangle(30,50,10,20, COLOR_BLACK);
+    }else{
+      
+    }
+  } 
   
   P1OUT &= ~LED;
   or_sr(0x10);

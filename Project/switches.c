@@ -36,20 +36,20 @@ void switch_interrupt_handler(){
   if(sw1Down){
     if(hover == 0)
       hover = 3;
-    hover--;
+    else
+      hover--;
   }
   else if(sw2Down){
     if(hover == 3)
       hover = 0;
-    hover++;
+    else
+      hover++;
   }
   else if(sw3Down){
-    if(hover == 0){
-      //playSong();
-    }
+    play = 0;
   }
   else if(sw4Down){
-    
+    play = 1;
   }
   
   switches = ~p2val & SWITCHES;

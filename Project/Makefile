@@ -14,7 +14,7 @@ libLcd.a: font-5x7.o lcdutils.o lcddraw.o
 lcddraw.o: lcddraw.c lcddraw.h lcdutils.h
 lcdutils.o: lcdutils.c lcdutils.h
 buzzer.o: buzzer.c buzzer.h
-StrLength.o: StrLength.a
+StrLength.o: StrLength.s
 
 install: libLcd.a
 	mkdir -p ../h ../lib

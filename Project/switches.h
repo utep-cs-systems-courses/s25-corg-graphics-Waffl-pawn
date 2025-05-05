@@ -12,6 +12,6 @@ void switch_init();
 void switch_interrupt_handler();
 
 extern int sw1Down, sw2Down, sw3Down, sw4Down;
-extern int hover, state;
+extern int play, hover;
 
 #endif
